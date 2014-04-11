@@ -18,7 +18,7 @@ from PyQt5.Qt import (
     QListView, QTextDocument, QSize, QComboBox, QFrame, QCursor)
 
 from calibre import prepare_string_for_xml
-from calibre.gui2 import error_dialog, choose_files, choose_save_file, NONE, info_dialog
+from calibre.gui2 import error_dialog, choose_files, choose_save_file, info_dialog
 from calibre.gui2.tweak_book import tprefs
 from calibre.utils.icu import primary_sort_key, sort_key
 from calibre.utils.matcher import get_char, Matcher
@@ -450,7 +450,7 @@ class QuickOpen(Dialog):
         Simply type in the characters:
         {chars}
         and press Enter.''').format(example=example, chars=chars))
-        hl.setMargin(50), hl.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
+        hl.setContentsMargins(50, 50, 50, 50), hl.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
         l.addWidget(hl)
         self.results = Results(self)
         self.results.setVisible(False)
@@ -552,15 +552,15 @@ class NamesModel(QAbstractListModel):
             return QVariant(self.items[index.row()])
         if role == Qt.DisplayRole:
             return QVariant('\xa0' * 20)
-        return NONE
 
     def filter(self, query):
         query = unicode(query or '')
+        self.beginResetModel()
         if not query:
             self.items = tuple((text, None) for text in self.names)
         else:
             self.items = tuple(self.matcher(query).iteritems())
-        self.reset()
+        self.endResetModel()
         self.filtered.emit(not bool(query))
 
     def find_name(self, name):
