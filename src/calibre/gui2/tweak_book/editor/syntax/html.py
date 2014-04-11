@@ -10,7 +10,7 @@ import re
 from functools import partial
 from collections import namedtuple
 
-from PyQt4.Qt import QFont, QTextBlockUserData
+from PyQt5.Qt import QFont, QTextBlockUserData
 
 from calibre.gui2.tweak_book.editor import SyntaxTextCharFormat
 from calibre.gui2.tweak_book.editor.syntax.base import SyntaxHighlighter, run_loop

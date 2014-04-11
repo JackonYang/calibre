@@ -70,8 +70,8 @@ def test_sqlite():
     print ('sqlite OK!')
 
 def test_qt():
-    from PyQt4.Qt import (QDialog, QImageReader, QNetworkAccessManager)
-    from PyQt4.QtWebKit import QWebView
+    from PyQt5.Qt import (QDialog, QImageReader, QNetworkAccessManager)
+    from PyQt5.QtWebKit import QWebView
     fmts = set(map(unicode, QImageReader.supportedImageFormats()))
     testf = set(['jpg', 'png', 'mng', 'svg', 'ico', 'gif'])
     if testf.intersection(fmts) != testf:
